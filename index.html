@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Complete Your Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      // This function will be triggered to open the Razorpay checkout
+      function initiateRazorpayPayment() {
+        var options = {
+          "key": "rzp_live_MvK1IUDWF1RwZL	", // Replace with your Razorpay Key ID
+          "amount": "50000", // Amount in paise (e.g., 50000 = 500 INR)
+          "currency": "INR",
+          "name": "Your Company Name",
+          "description": "Product or Service Description",
+          "image": "https://your-company-logo-url.com/logo.png",
+          "handler": function (response) {
+            alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+            // Redirect after successful payment
+            window.location.href = "https://kavangunassets.com/"; 
+          },
+          "prefill": {
+            "name": "Customer Name",
+            "email": "customer@example.com"
+          },
+          "theme": {
+            "color": "#3399cc"
+          },
+          "modal": {
+            "ondismiss": function() {
+              alert('Payment cancelled');
+            }
+          }
+        };
+        
+        // Initialize Razorpay payment popup
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+      }
+      
+      // Run the payment function when the page loads
+      window.onload = initiateRazorpayPayment;
+    </script>
+  </head>
+  <body>
+    <h3>Redirecting to Razorpay...</h3>
+  </body>
+</html>
